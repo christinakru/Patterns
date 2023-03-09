@@ -9,8 +9,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
-@Data
-@NoArgsConstructor
 public class Generator {
     private static Faker fakerRu = new Faker(new Locale("ru"));
     private static Faker fakerEng = new Faker(new Locale("eng"));

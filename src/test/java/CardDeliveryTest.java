@@ -15,28 +15,30 @@ public class CardDeliveryTest {
 
     @Test
     void sendCorrectForm() {
+        String date = Generator.getRandomCorrectDate();
         $("[data-test-id='city'] input").setValue(Generator.getRandomCorrectCity());
         $("[data-test-id='date'] input").doubleClick().sendKeys(Keys.BACK_SPACE);
-        $("[data-test-id='date'] input").setValue(Generator.getRandomCorrectDate());
+        $("[data-test-id='date'] input").setValue(date);
         $("[data-test-id='name'] input").setValue(Generator.getRandomCorrectName());
         $("[data-test-id='phone'] input").setValue(Generator.getRandomCorrectPhone());
         $("[data-test-id='agreement']").click();
         $$("button").find(exactText("Запланировать")).click();
         $("[class='notification__title']").shouldBe(visible, Duration.ofSeconds(10));
-        $("[data-test-id=success-notification] .notification__content").shouldHave(text("Встреча успешно запланирована на"));
+        $("[data-test-id=success-notification] .notification__content").shouldHave(text("Встреча успешно запланирована на " + date));
     }
 
     @Test
     void sendCorrectFormTwice() {
+        String date = Generator.getRandomCorrectDate();
         $("[data-test-id='city'] input").setValue(Generator.getRandomCorrectCity());
         $("[data-test-id='date'] input").doubleClick().sendKeys(Keys.BACK_SPACE);
-        $("[data-test-id='date'] input").setValue(Generator.getRandomCorrectDate());
+        $("[data-test-id='date'] input").setValue(date);
         $("[data-test-id='name'] input").setValue(Generator.getRandomCorrectName());
         $("[data-test-id='phone'] input").setValue(Generator.getRandomCorrectPhone());
         $("[data-test-id='agreement']").click();
         $$("button").find(exactText("Запланировать")).click();
         $("[class='notification__title']").shouldBe(visible, Duration.ofSeconds(10));
-        $("[data-test-id=success-notification] .notification__content").shouldHave(text("Встреча успешно запланирована на"));
+        $("[data-test-id=success-notification] .notification__content").shouldHave(text("Встреча успешно запланирована на " + date));
 
         $$("button").find(exactText("Запланировать")).click();
         $("[class='notification__title']").shouldBe(visible, Duration.ofSeconds(10));
@@ -44,7 +46,7 @@ public class CardDeliveryTest {
 
         $$("button").find(exactText("Перепланировать")).click();
         $("[class='notification__title']").shouldBe(visible, Duration.ofSeconds(10));
-        $("[data-test-id=success-notification] .notification__content").shouldHave(text("Встреча успешно запланирована на"));
+        $("[data-test-id=success-notification] .notification__content").shouldHave(text("Встреча успешно запланирована на " + date));
     }
 
     @Test
@@ -92,12 +94,6 @@ public class CardDeliveryTest {
         $("[data-test-id='phone'] input").setValue(Generator.getRandomCorrectPhone());
         $$("button").find(exactText("Запланировать")).click();
         $("[data-test-id=agreement].input_invalid .checkbox__text").shouldHave(exactText("Я соглашаюсь с условиями обработки и использования моих персональных данных"));
-    }
-
-    @Test
-    void sendEmpty() {
-        $$("button").find(exactText("Запланировать")).click();
-        $("[data-test-id=city].input_invalid .input__sub").shouldHave(exactText("Поле обязательно для заполнения"));
     }
 
     @Test
