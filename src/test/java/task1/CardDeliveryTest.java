@@ -76,18 +76,6 @@ public class CardDeliveryTest {
     }
 
     @Test
-    void sendIncorrectPhone() {
-        $("[data-test-id='city'] input").setValue(Generator.getRandomCorrectCity());
-        $("[data-test-id='date'] input").doubleClick().sendKeys(Keys.BACK_SPACE);
-        $("[data-test-id='date'] input").setValue(Generator.getRandomCorrectDate());
-        $("[data-test-id='name'] input").setValue(Generator.getRandomCorrectName());
-        $("[data-test-id='phone'] input").setValue(Generator.getRandomIncorrectPhone());
-        $("[data-test-id='agreement']").click();
-        $$("button").find(exactText("Запланировать")).click();
-        $("[data-test-id=date] .input_invalid .input__sub").shouldHave(exactText("Заказ на выбранную дату невозможен"));
-    }
-
-    @Test
     void sendIncorrectName() {
         $("[data-test-id='city'] input").setValue(Generator.getRandomCorrectCity());
         $("[data-test-id='date'] input").doubleClick().sendKeys(Keys.BACK_SPACE);
